@@ -1,0 +1,24 @@
+<!-- <div class="relative h-48 w-96 rounded-2xl bg-slate-300">
+  <div class="z-10 h-48 w-48 bg-black/100"></div>
+  <img class="absolute h-48 w-96 object-cover" [src]="tram.imageUrl" />
+</div> -->
+<div class="group h-48 w-96">
+  <div class="relative rounded-xl">
+    <div
+      class="bg-gradient-radial absolute h-full w-full rounded-xl from-transparent to-black/70 p-4 text-white transition-all group-hover:bg-black/65">
+      <div class="relative h-full w-full overflow-hidden">
+        <div class="absolute bottom-0 transition-all group-hover:bottom-3/4">
+          <p class="text-2xl font-bold">{{tram.name}}</p>
+        </div>
+        <div
+          class="invisible absolute -bottom-full transition-all group-hover:visible group-hover:bottom-0">
+          <!-- button test -->
+          <div class="size-14 bg-red-400"></div>
+        </div>
+      </div>
+    </div>
+    <img
+      class="max-h-48 w-full max-w-96 rounded-xl object-cover"
+      [src]="tram.imageUrl" />
+  </div>
+</div>
