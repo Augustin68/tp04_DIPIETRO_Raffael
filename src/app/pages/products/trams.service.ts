@@ -1,11 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Tram } from '../../models/tram.type';
+import { Search } from '../../models/search.type';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TramsService {
+  isTramMatchingSearch(tram: Tram, search: Search): boolean {
+    return tram.name.toLowerCase().includes(search.text.toLowerCase());
+  }
+
   getTrams(): Observable<Tram[]> {
     const trams: Tram[] = [
       {

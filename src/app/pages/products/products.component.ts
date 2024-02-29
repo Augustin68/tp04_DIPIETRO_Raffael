@@ -6,23 +6,36 @@ import {
   inject
 } from '@angular/core';
 import { TramsService } from './trams.service';
-import { Observable } from 'rxjs';
+import { Observable, combineLatest, map } from 'rxjs';
 import { Tram } from '../../models/tram.type';
 import { TramCardComponent } from '../../components/tramCard/tramCard.component';
+import { SearchbarComponent } from '../../components/searchbar/searchbar.component';
+import { SearchbarService } from '../../components/searchbar/searchbar.service';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [CommonModule, TramCardComponent],
+  imports: [CommonModule, TramCardComponent, SearchbarComponent],
+  providers: [SearchbarService],
   templateUrl: './products.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductsComponent implements OnInit {
-  tramsService = inject(TramsService);
-
   declare trams$: Observable<Tram[]>;
 
+  tramsService = inject(TramsService);
+  searchbarService = inject(SearchbarService);
+
   ngOnInit() {
-    this.trams$ = this.tramsService.getTrams();
+    this.trams$ = combineLatest([
+      this.tramsService.getTrams(),
+      this.searchbarService.getSearch$()
+    ]).pipe(
+      map(([trams, search]) =>
+        trams.filter((tram) =>
+          this.tramsService.isTramMatchingSearch(tram, search)
+        )
+      )
+    );
   }
 }
