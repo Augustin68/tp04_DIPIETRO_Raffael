@@ -1,1 +1,5 @@
-<p>cart works!</p>,
+<ng-container *ngIf="(tramsInCart$ | async) as tramsInCart">
+  <p *ngFor="let tram of tramsInCart">
+    {{ tram.count }} x {{ tram.model.name }}
+  </p>
+</ng-container>

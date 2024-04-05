@@ -3,8 +3,13 @@ import { Tram } from '../../models/tram.type';
 import { Injectable } from '@angular/core';
 import { AddTramToCart, ClearCart, DeleteTramFromCart } from './cart.actions';
 
+export type TramInCart = {
+  count: number;
+  model: Tram;
+};
+
 export type CartStateModel = {
-  trams: { [tramId: number]: { count: number; model: Tram } };
+  trams: { [tramId: number]: TramInCart };
 };
 
 const defaultCartState: CartStateModel = {
@@ -20,9 +25,10 @@ export class CartState {
   constructor() {}
 
   @Action(AddTramToCart)
-  addTramToCart(ctx: StateContext<CartStateModel>, tram: Tram) {
+  addTramToCart(ctx: StateContext<CartStateModel>, { tram }: { tram: Tram }) {
     const state = ctx.getState();
     const tramId = tram.id;
+    console.log('tramId', tram);
     const tramCount = state.trams[tramId]?.count || 0;
     ctx.patchState({
       trams: {
@@ -36,7 +42,10 @@ export class CartState {
   }
 
   @Action(DeleteTramFromCart)
-  removeTramFromCart(ctx: StateContext<CartStateModel>, tram: Tram) {
+  removeTramFromCart(
+    ctx: StateContext<CartStateModel>,
+    { tram }: { tram: Tram }
+  ) {
     const state = ctx.getState();
     delete state.trams[tram.id];
     ctx.patchState({
@@ -52,7 +61,7 @@ export class CartState {
   }
 
   @Selector()
-  static getCart(state: CartStateModel) {
-    return state.trams;
+  static getCartTrams(state: CartStateModel) {
+    return Object.values(state.trams);
   }
 }
