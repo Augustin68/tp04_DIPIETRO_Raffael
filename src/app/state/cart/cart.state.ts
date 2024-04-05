@@ -63,4 +63,12 @@ export class CartState {
   static getCartTrams(state: CartStateModel) {
     return Object.values(state.trams);
   }
+
+  @Selector()
+  static getCartTramsCount(state: CartStateModel) {
+    return Object.values(state.trams).reduce(
+      (acc, tram) => acc + tram.count,
+      0
+    );
+  }
 }
