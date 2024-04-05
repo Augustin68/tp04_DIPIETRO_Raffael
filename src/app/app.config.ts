@@ -10,6 +10,9 @@ import {
   dictionary as dictionaryFr
 } from '@zxcvbn-ts/language-fr';
 import { dictionary } from '@zxcvbn-ts/language-common';
+import { NgxsModule } from '@ngxs/store';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
+import { CartState } from './state/cart/cart.state';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -22,6 +25,10 @@ export const appConfig: ApplicationConfig = {
         ...dictionary,
         ...dictionaryFr
       }
-    })
+    }),
+    importProvidersFrom(
+      NgxsModule.forRoot([CartState], { developmentMode: true })
+    ),
+    importProvidersFrom(NgxsReduxDevtoolsPluginModule.forRoot())
   ]
 };

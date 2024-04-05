@@ -13,6 +13,8 @@ import { UserFormComponent } from './components/user-form/user-form.component';
 import { BehaviorSubject } from 'rxjs';
 import { CreateUser } from './models/create-user.type';
 import { CommonModule } from '@angular/common';
+import { NgxsModule } from '@ngxs/store';
+import { CartState } from './state/cart/cart.state';
 
 @Component({
   selector: 'app-root',

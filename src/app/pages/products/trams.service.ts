@@ -14,6 +14,7 @@ export class TramsService {
   getTrams(): Observable<Tram[]> {
     const trams: Tram[] = [
       {
+        id: 1,
         name: 'Citadis',
         description:
           'The Citadis is a family of low-floor trams (streetcars) and light rail vehicles built by Alstom.',
@@ -21,6 +22,7 @@ export class TramsService {
         imageUrl: 'assets/trams/citadis.jpg'
       },
       {
+        id: 2,
         name: 'Flexity',
         description:
           'Flexity trams are a family of modern trams manufactured by Bombardier Transportation.',
@@ -28,6 +30,7 @@ export class TramsService {
         imageUrl: 'assets/trams/flexity.jpg'
       },
       {
+        id: 3,
         name: 'Cobra',
         description:
           'The Cobra is a family of high-floor trams manufactured by Siemens AG.',
@@ -35,6 +38,7 @@ export class TramsService {
         imageUrl: 'assets/trams/cobra.jpg'
       },
       {
+        id: 4,
         name: 'Eurotram',
         description:
           'The Eurotram is a family of high-floor trams manufactured by Alstom.',
