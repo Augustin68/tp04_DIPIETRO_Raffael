@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { CartState, TramInCart } from '../../state/cart/cart.state';
+import { ClearCart, DeleteTramFromCart } from '../../state/cart/cart.actions';
 
 @Component({
   selector: 'app-cart',
@@ -19,4 +20,12 @@ export class CartComponent {
   @Select(CartState.getCartTrams) declare tramsInCart$: Observable<
     TramInCart[]
   >;
+
+  deleteFromCart(tram: TramInCart): void {
+    this.store.dispatch(new DeleteTramFromCart(tram.model));
+  }
+
+  clearCart(): void {
+    this.store.dispatch(new ClearCart());
+  }
 }

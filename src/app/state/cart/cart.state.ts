@@ -47,11 +47,10 @@ export class CartState {
     { tram }: { tram: Tram }
   ) {
     const state = ctx.getState();
-    delete state.trams[tram.id];
+    const newTrams = { ...state.trams };
+    delete newTrams[tram.id];
     ctx.patchState({
-      trams: {
-        ...state.trams
-      }
+      trams: newTrams
     });
   }
 
